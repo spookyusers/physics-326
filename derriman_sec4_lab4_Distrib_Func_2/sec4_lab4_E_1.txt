@@ -1,0 +1,9 @@
+Vernier Format 2
+Untitled.cmbl 10/3/2024 12:25:54 .
+Latest
+Time	Radiation
+t	Rad
+s	Counts
+
+0.5	38
+1	47
