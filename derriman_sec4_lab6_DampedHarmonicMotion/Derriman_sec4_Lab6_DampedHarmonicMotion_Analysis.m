@@ -8,10 +8,6 @@
 % Spring Force vs Displacement Analysis
 % -------------------------------------
 
-% I'll use this part once we have data for lab, for now just use sample
-% data below. Once data is acquired, uncomment this section and comment out
-% sample data.
-
 % Import data
 % data1 = readtable("S4L6C1.txt");  % LoggerPro
 % data2 = readtable("S4L6C2.txt"); % Calculated
