@@ -1,5 +1,5 @@
 
-% Kym Derriman (Partner: Ethan Howell)
+% Kym Derriman (Partner: Evan Howell)
 % Lab 6: Damped Harmonic Motion
 % 10/17/2024
 
@@ -9,77 +9,27 @@
 % -------------------------------------
 
 % Import data
-% data1 = readtable("S4L6C1.txt");  % LoggerPro
-% data2 = readtable("S4L6C2.txt"); % Calculated
+means = [];
+stds = [];
+sterr = [];
+filename.Temp = "s4L6_%d.txt";
+N_runs = 6;
 
-
-% Arrays: Force (LoggerPro, Calculated)
-%force_LP = data1.Force;
-%force_C = data2.Force; 
-
-% Arrays: Displacement (LoggerPro, Calculated)
-%displacement_LP = data1.Displacement;
-%displacement_C = data2.Displacement;
-
-% mass of weights (stamped)
-% m = [] % read from weights
-
-% -------------------------------
-% Sample Data
-% -------------------------------
+for i = 1:N_runs
+    data = readtable(sprintf(filename.Temp, i));
+    pos = data.Position;
+    means = [means, mean(pos)];
+    stds = [stds, std(pos)];
+    sterr = [sterr, std(pos)/sqrt(lenght(pos)];
+end
 
 % Mass of weights (first is used for "stretched" position)
-mass = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]; % in kg
+mass = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5]; % in kg
+
 g = 9.80; % acceleration due to gravity in m/s^2
 
 % Calculated Force based on mass (F = m * g)
 force_C = g .* mass; % in Newtons (N)
-
-% Force measured using LoggerPro (simulated with slight experimental variation)
-force_LP = force_C .* (1 + 0.02*randn(1,6)); % adding ~2% random noise
-
-% Displacement measured using LoggerPro (simulated data in meters)
-disp_LP = [0.02, 0.04, 0.06, 0.08, 0.10, 0.12] + 0.001*randn(1,6); % meters
-
-% Displacement measured using meterstick (more precise measurements in meters)
-disp_mS = [0.0195, 0.0398, 0.0602, 0.0801, 0.1003, 0.1200] + 0.0005*randn(1,6); % meters
-
-% -------------------------------
-% Uncertainties
-% -------------------------------
-
-% Force uncertainty
-fT_uncertainty = 0.10 * force_LP; % 10% uncertainty from force transducer
-
-% Mass uncertainty
-mass_uncertainty = 0.001; % kg (check manufacturer for precise value)
-
-% Displacement uncertainty
-mS_uncertainty = 0.005; % meters (1 cm markings on meterstick)
-uPs_uncertainty = 0.005; % meters (assuming ultrasonic position sensor uncertainty
-
-% Total Force Uncertainty (combining transducer and mass uncertainty)
-% delta_F = F * sqrt( (dfT/F)^2 + (dm/m)^2 )
-force_total_uncertainty = sqrt(fT_uncertainty.^2 + (g * mass_uncertainty).^2); % in N
-
-% Total Displacement Uncertainty
-disp_total_uncertainty = sqrt(mS_uncertainty^2 + uPs_uncertainty^2); % in meters
-
-% -------------------------------
-% Calculate Mean Values
-% -------------------------------
-
-% Mean Force from LoggerPro
-mean_force_LP = mean(force_LP);
-
-% Mean Calculated Force
-mean_force_C = mean(force_C);
-
-% Mean Displacement from LoggerPro
-mean_disp_LP = mean(disp_LP);
-
-% Mean Displacement from Meterstick
-mean_disp_mS = mean(disp_mS);
 
 % -------------------------------
 % Calculate Slope (Spring Constant k)
@@ -89,15 +39,11 @@ mean_disp_mS = mean(disp_mS);
 % F = -k * x
 
 % Prepare data for regression
-X = disp_mS'; % independent variable (displacement) in meters
-Y = force_LP'; % dependent variable (force) in Newtons
+X = mass; % independent variable (displacement) in meters
+Y = means; % dependent variable (force) in Newtons
 
 % Number of data points
 N = length(X);
-
-% Calculate means of X and Y
-mean_X = mean(X);
-mean_Y = mean(Y);
 
 % Calculate the covariance of X and Y and the variance of X
 Cov_XY = sum( (X - mean_X) .* (Y - mean_Y) );
