@@ -10,7 +10,7 @@
 %       sigmaA: Uncertainty (standard error) A
 %       sigmaB: Uncertainty (standard error) B
 
-function [A, B, sigmaA, sigmaB] = linLSqFit_Derriman(x, y, w)
+function [A, B, sigmaA, sigmaB] = linLSF_Derr(x, y, w)
 
 % Reshape the arrays into column vectors
 x = x(:);
