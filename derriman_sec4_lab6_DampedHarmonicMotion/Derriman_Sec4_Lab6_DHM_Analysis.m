@@ -130,14 +130,14 @@ sigma_T_theoretical = T_theoretical * (sigk / (2 * k));
 fprintf('----------------------------------------------------------\n');
 fprintf('Period of Oscillation (T) = %.3f ± %.4f seconds\n', T, sigmaT);
 fprintf('Theoretical Period (T) = %.3f ± %.4f seconds\n', T_theoretical, sigma_T_theoretical);
-fprintf('----------------------------------------------------------\n');
 
 % Compare Measured Period with Theoretical
 if abs(T - T_theoretical) <= (sigmaT + sigma_T_theoretical)
-    fprintf('Measured period is within the uncertainty bounds of theor. value.\n');
+    fprintf('Measured period is within the uncertainty bounds of\ntheoretial value.\n');
 else
     fprintf('Measured period deviates significantly from theor. value.\n');
 end
+fprintf('----------------------------------------------------------\n');
 
 % Plot Velocity as a Function of Position
 figure;
