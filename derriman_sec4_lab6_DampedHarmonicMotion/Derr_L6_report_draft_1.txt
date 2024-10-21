@@ -1,0 +1,97 @@
+Name: Kym Derriman (Partner Evan Howell) 
+Lab 6: Damped Harmonic Motion 
+Date: 10/17/2024 
+
+DAMPED HARMONIC MOTION 
+
+INTRODUCTION 
+
+We conducted an experiment to study the motion of a damped harmonic oscillator. We set up a spring with a weight attached (harmonic oscillator) and a paper plate is attached to create damping by introducing greater air resistance.  
+
+BACKGROUND 
+
+Equations of Motion:  
+
+We describe the motion of this system with (1), the general formula of a damped harmonic oscillator, where m is the mass of the system, b is the damping coefficient proportional to the damping force and k is the spring constant from Hooke’s Law. 
+
+[Equation] 
+
+The paper plate causes the system to exhibit underdamped motion, which can be described by (2), where A is the initial amplitude, [Equation] is the damping coefficient, [Equation] is the damped angular frequency and [Equation] is the phase constant for displacement. 
+
+The damped frequency is related to the natural frequency by the damping coefficient as shown in (3), where the natural frequency is [Equation]. 
+ 
+
+The period of oscillation modifies the general expression [Equation] to include the damped frequency, giving the theoretical damped period of oscillation (4). 
+
+We see that velocity leads displacement by [Equation], which makes sense if one imagines the motion of a spring, having greatest velocity when acceleration is least, which occurs when the spring passes the equilibrium point during its oscillations. 
+
+To obtain a more accurate representation of the motion of a spring, we introduce another force, air resistance. This force acts to “dampen,” the motion by constantly acting against the direction of acceleration. We define a constant [Equation], which is the damping coefficient that scales with velocity, [Equation]. We assume a solution of [Equation], and using a method of characteristic equations and the quadratic equation we find two roots and a general solution, [Equation], where [Equation]  and [Equation] . If we assume that [Equation] is less than [Equation], then we can arrange it so that [Equation] is equal to [Equation] , which is of a form that allows us to use Euler’s identity and thus a general-purpose equation of motion for this experiment in (4).  
+
+Here, [Equation] , which represents the frequency of oscillation,  [Equation] is the damping coefficient, [Equation]is the constant related to the decay coefficient, and [Equation]  is the initial phase shift. 
+
+Least-Squares Fitting  
+
+Least squares fitting is a mathematical method used to find the best-fitting curve or line to a set of data points by minimizing the sum (5) of the squares of the vertical deviations (residuals) between the observed values and those predicted by the model. In our case, we use a linear equation to model our observations, [Equation]. 
+
+To minimize [Equation], (5) is differentiated with respect to [Equation]and to [Equation]and weighted, shown below in (6), (7), (8). 
+
+PROCEDURE 
+
+A: Equipment Setup 
+
+We set this experiment up by hanging a weight from the bottom of a spring and attaching the spring to a force transducer. Below the weight we placed an ultrasonic position detector. We then connected the force transducer to the analog CH1 plug on a LabPro interface. We connected the ultrasonic position sensor to the DIG/SONIC1 connector on the LabPro interface, see figure 1. The LabPro is set up to transmit data to a computer, on which we will collect data with LoggerPro. 
+
+B: LoggerPro Setup 
+
+We set up LoggerPro according to the appendix of the lab manual [1]. The sampling rate was set for 30 samples per second and the collection time for 10 seconds. 
+
+C: Measurements to Determine [Equation] 
+
+The force transducer calibration accuracy is given by the manual as 10%, so we will need to use the mass stamped on the weights for analysis. We recorded the masses of the weights, then proceeded with the following steps. 
+
+    Hang the spring and weight holder from the force transducer. 
+
+    Record this position as the “unstretched,” position. 
+
+    We added 100g to the holder and measured the displacement with LoggerPro and a meter stick, ensuring the weight was completely at rest before measuring. We repeated this measurement 5 times, increasing the weight by 100g each time, shown in Table 1. 
+
+[PLACEHOLDER: TABLE 1] 
+
+This data was exported as a text file for analysis and a force vs displacement plot created in MATLAB, see Figure 2. 
+
+[PLACEHOLDER: FIGURE 2] 
+
+D: Measurements with 500g 
+
+We placed about 500g on the weight holder without the paper plate and used LoggerPro to measure the position and force versus time for 10 oscillations, allowing it to calculate velocity and acceleration in separate columns. In order to find the fastest possible sample rate to give the most accurate data while allowing the ultrasonic transducer to have time to stop oscillating and thus provide reliable data, we tested a run at the fastest allowed by LoggerPro [FASTEST RATE] and checked for missing data entries, then proceeded to test slower rates until data came back without missing entries, which we found to happen at [SELECTED RATE]. Once this rate was obtained, we did another run to collect data that we then used for analysis. 
+
+E: Plot position, velocity, and acceleration vs time 
+
+We imported the data collected from part D into MATLAB and plotted position vs time, velocity vs time, and acceleration vs time, ensuring that the plot represents values oscillating about a mean of zero [HOW??], see Figure 3. 
+
+[PLACEHOLDER FOR FIGURE 3] 
+
+F: Find the Period of Oscillation [Equation] 
+
+We calculate the period of oscillation, [Equation], by finding the times when the position of the weight passes zero twice.  
+
+Percent error between theoretical values and experimental values for the period of oscillation were found by first calculating the theoretical value with (5), then finding the percent error with (6). 
+
+RESULTS AND DISCUSSION 
+
+
+[Equation] are zero-crossing times 
+
+[Equation] is the fitted line, where [Equation]is the y-intercept and represents the initial shift in the zero-crossing times, as in the time when the first zero-crossing happens. The uncertainty in this value is then how closely we know this value based on the quality of the data and quality of the linear fit. 
+
+[Equation]Is the number of data points minus degrees of freedom 
+
+[Equation] is the sum of the squares of the independent variable values (in this case, the indices 1, 2, 3, ...). 
+
+ 
+
+REFERENCES 
+
+[1] Lee, Sang-Hyuk, Physics 326 Lab 6 Guide, “Damped Harmonic Motion”, Rutgers University (2024) 
+
+ 
