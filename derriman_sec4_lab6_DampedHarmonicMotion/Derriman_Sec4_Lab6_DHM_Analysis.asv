@@ -160,46 +160,72 @@ min_times = t(min_indices);
 % Combine maxima and minima
 all_peak_times = [max_times; min_times];
 all_peak_positions = [max_positions; min_positions];
-%% Linear Regression and Damping Coefficient
 
-% Prepare Peak Data for Log Plotting
+%% Prepare Peak Data for Plotting Log
+
+% Sort peaks by time and take abs val (only
 [sorted_times, sort_idx] = sort(all_peak_times);
 sorted_amplitudes = abs(all_peak_positions(sort_idx));
 ln_amplitudes = log(sorted_amplitudes);
 
-% Perform Linear Regression
-w = ones(size(sorted_times));
+% Sort the peaks by time
+[sorted_times, sort_idx] = sort(all_peak_times);
+sorted_peaks = all_peak_positions(sort_idx);
+
+% Take the absolute value of the peaks (only care ab ampl)
+sorted_amplitudes = abs(sorted_peaks);
+
+% Take the natural logarithm of the amplitudes (for lin exp dec)
+ln_amplitudes = log(sorted_amplitudes);
+
+% Define weights for linear regression (look into this)
+w = ones(size(sorted_times)); % use sigma amplit instead????
+%% Fit Times, Amplitudes, and get Decay Const and Init. Amplitude
+% Inputs: x (sorted_times), y (ln_amplitudes), w
 [A, B, sigmaA, sigmaB] = calculate_linLSF(sorted_times, ln_amplitudes, w);
 
-% Extract Decay Constant and Initial Amplitude
-gamma = -B;
-sigma_gamma = sigmaB;
-A0 = exp(A);
-sigma_A0 = A0 * sigmaA;
+b = -B; % Decay constant (negative of the slope)
+ln_A0 = A; % Intercept
+A0 = exp(ln_A0); % Initial amplitude
 
-% Plot ln(Amplitude) vs. Time with Linear Fit
+% Uncertainties in b and ln_A0 are sigmaB and sigmaA
+sigma_b = sigmaB; % Uncertainty in decay constant
+sigma_ln_A0 = sigmaA; % Uncertainty in ln(A0)
+sigma_A0 = A0 * sigma_ln_A0; % Uncertainty in A0 (using error propagation)
+
+
+%%  Plot ln(amplitude) vs time with lin. fit, Display Decay Const.
 figure;
 scatter(sorted_times, ln_amplitudes, 'ko', 'DisplayName', 'Data');
 hold on;
+% Linear fit line
 t_fit = linspace(min(sorted_times), max(sorted_times), 100);
 ln_amplitude_fit = A + B * t_fit;
 plot(t_fit, ln_amplitude_fit, 'r-', 'LineWidth', 2, 'DisplayName', 'Linear Fit');
 xlabel('Time (s)');
 ylabel('ln(Amplitude)');
-title('Log of Amplitude vs. Time');
+title('Log of Amplitude vs Time');
 legend('show');
 grid on;
 hold off;
 
-% Calculate Damping Force Coefficient
-R = 2 * total_mass * gamma;
-sigma_R = 2 * total_mass * sigma_gamma;
+% Decay constant (damping coefficient gamma)
+gamma = -B; % gamma = -slope from linear fit
+sigma_gamma = sigmaB; % Uncertainty in gamma
 
-% Display Results
+% Initial amplitude
+A0 = exp(A);
+sigma_ln_A0 = sigmaA; % Uncertainty in ln(A0)
+sigma_A0 = A0 * sigma_ln_A0; % Uncertainty in A0
+
+% Damping force coefficient (R)
+R = 2 * total_mass * gamma; % R = 2m * gamma
+sigma_R = 2 * total_mass * sigma_gamma; % Uncertainty in R
+
+% Display the results
 fprintf('Damping coefficient (gamma): %.4f ± %.4f s^-1\n', gamma, sigma_gamma);
 fprintf('Damping force coefficient (R): %.4f ± %.4f kg/s\n', R, sigma_R);
 fprintf('Initial amplitude (A0): %.4f ± %.4f m\n', A0, sigma_A0);
-
 
 
 
