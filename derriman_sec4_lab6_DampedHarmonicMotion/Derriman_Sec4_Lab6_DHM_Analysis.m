@@ -59,9 +59,9 @@ legend('Data with Error Bars', 'Linear Fit', 'Location', 'northwest');
 %% Print the Results
 fprintf('Parameters and Uncertainties y = A + Bx:\n');
 fprintf('----------------------------------------------------------\n');
-fprintf('Intercept (A) = %.6f ± %.6f m\n', A, sigA);
-fprintf('Slope (B) = %.6f ± %.6f m/kg\n', B, sigB);
-fprintf('Spring constant (k) = %.2f ± %.2f N/m\n', k, sigk);
+fprintf('Intercept (A) = %.9f ± %.6f m\n', A, sigA);
+fprintf('Slope (B) = %.9f ± %.6f m/kg\n', B, sigB);
+fprintf('Spring constant (k) = %.4f ± %.4f N/m\n', k, sigk);
 fprintf('----------------------------------------------------------\n');
 %% Import Data 500g weight
 tbl = readtable("L6_500g_Oscillation.txt");
