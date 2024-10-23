@@ -2,7 +2,8 @@
 % Kym Derriman (Partner: Evan Howell)
 % 10/17/2024
 clc;clear;close all;
-%% Preallocation, Data Import, and Setup
+%% 100g weights (Steps 1-3)
+% Preallocation, Data Import, and Setup
 num = 6;
 pos_means = zeros(1, num);
 pos_std = zeros(1, num);
@@ -21,7 +22,7 @@ for i = 1:num
     pos_stdMean(i) = pos_std(i) / sqrt(N);
 end
 
-%% Plot Displacement vs Mass
+%% Plot Displacement vs Mass (Step 4, Figure 1)
 % Calculate displacement (inverted positions)
 displArr1 = max(pos_means) - pos_means; 
 
@@ -37,42 +38,39 @@ ylabel('Displacement (m)', 'FontSize', 11);
 legend('Location', 'northwest');
 set(gca, 'FontSize', 12);
 
-%% Perform Weighted Linear Least Squares Fit (Displacement vs Mass)
+%% Perform LSFit (Steps 5,6,7,8)
 w = 1 ./ (pos_stdMean .^ 2);    % Weights for LSF
 [A, B, sigA, sigB] = calculate_linLSF(weights, displArr1, w);
 
 % Calculate Spring Constant from Slope
-g = 9.81;                       % Acceleration due to gravity
-slope = B;                      % Slope from LSF (B)
-k = g / slope;
-sigk = sigB * g / (slope^2);    % Propagate uncertainty
-%% Plot Linear Fit (Displacement vs Mass) with error bars 
+g = 9.81;
+k = g / B;
+sigk = sigB * g / (B^2);    % Propagate uncertainty
+
 x_fit = linspace(min(weights), max(weights), 100);
 y_fit = A + B * x_fit;
 
 hold on;
 plot(x_fit, y_fit,'k--', 'LineWidth', 1, 'DisplayName', 'Linear Fit');
 hold off;
-
 legend('Data with Error Bars', 'Linear Fit', 'Location', 'northwest');
 
-%% Print the Results
+%% Print the Results (Step 8 Results)
 fprintf('Parameters and Uncertainties y = A + Bx:\n');
 fprintf('----------------------------------------------------------\n');
 fprintf('Intercept (A) = %.9f ± %.6f m\n', A, sigA);
 fprintf('Slope (B) = %.9f ± %.6f m/kg\n', B, sigB);
 fprintf('Spring constant (k) = %.4f ± %.4f N/m\n', k, sigk);
 fprintf('----------------------------------------------------------\n');
-%% Import Data 500g weight
+%% 500g Weights and Plot X, V, A (Step 8,9, Fig 3)
 tbl = readtable("L6_500g_Oscillation.txt");
 t = tbl.Time;
 posArr = tbl.Position;
 velArr = tbl.Velocity;
 accelArr = tbl.Acceleration;
-
 % Invert positions to get displacement
 displArr2 = posArr - mean(posArr); 
-%% Plot Displacement, Velocity, Acceleration Data
+
 figure;
 subplot(3,1,1);
 plot(t, displArr2);
@@ -93,18 +91,15 @@ xlabel('Time (s)'); ylabel('Acceleration (m/s^2)');
 annotation('textbox', [0.1, 0.01, 0.8, 0.05],'String', ...
     '*Values shifted by mean to oscillate about zero.','EdgeColor', ...
     'none','HorizontalAlignment', 'center', 'FontSize', 10);
-%% Find Zero Crossings for Position, Velocity, Acceleration
+%% Find Zero Crossings, Period and Relative Phase (Step 10-14)
 [pos_crossTimes, pos_crossIndex] = zeroCross(displArr2, t);
 [vel_crossTimes, vel_crossIndex] = zeroCross(velArr, t);
 [accel_crossTimes, accel_crossIndex] = zeroCross(accelArr, t);
 
-%%  Period and Relative Phase
 weights = 1/30;
 [T, sigmaT,~,~] = periodPhase(pos_crossTimes, weights, 'Position');
 periodPhase(vel_crossTimes, weights, 'Velocity');
 periodPhase(accel_crossTimes, weights, 'Acceleration');
-
-%%  Compare Measured Period with Theoretical Value
 
 % Mass of weight holder, weight, and spring (1/3 * spring mass), g to kg
 mass_holder = 99.1 / 1000;
@@ -129,7 +124,7 @@ else
 end
 fprintf('----------------------------------------------------------\n');
 
-%%  Phase Space Plot Velocity vs Position
+%% Part H: Phase Space Plot Velocity vs Position
 figure;
 grid on; box on;
 plot(posArr, velArr, 'b');
@@ -138,8 +133,18 @@ xlabel('Position (m)');
 ylabel('Velocity (m/s)');
 legend('Velocity vs Position');
 
-%% Calculating Amplitude Decay (Max Min Peaks)
+%% Part I: Paper Plate Section
 
+tbl = readtable("L6_paperPlate_Oscillation.txt");
+t = tbl.Time;
+posArr = tbl.Position;
+velArr = tbl.Velocity;
+accelArr = tbl.Acceleration;
+
+% Invert positions to get displacement
+displArr2 = posArr - mean(posArr); 
+
+% Calculating Amplitude Decay (Max Min Peaks)
 % Find zero crossings of velocity with directions
 [vel_crossTimes, vel_crossIndices, crossingDirections] = zeroCross2(velArr, t);
 
@@ -167,15 +172,32 @@ all_peak_positions = [max_positions; min_positions];
 sorted_amplitudes = abs(all_peak_positions(sort_idx));
 ln_amplitudes = log(sorted_amplitudes);
 
+% Plot natural log of amplitude vs time
+figure;
+grid on; box on;
+plot(sorted_times, ln_amplitudes, 'b');
+title('Natural log of Amplitude vs Time');
+xlabel('time (s)');
+ylabel('amplitude (m)');
+legend('log(amplitude)');
+
 % Perform Linear Regression
 w = ones(size(sorted_times));
 [A, B, sigmaA, sigmaB] = calculate_linLSF(sorted_times, ln_amplitudes, w);
 
-% Extract Decay Constant and Initial Amplitude
+% Extract Parameters
 gamma = -B;
 sigma_gamma = sigmaB;
+
 A0 = exp(A);
 sigma_A0 = A0 * sigmaA;
+
+R = 2 * total_mass * gamma;
+sigma_R = 2 * total_mass * sigma_gamma;
+
+fprintf('Damping coefficient (gamma): %.4f ± %.4f s^-1\n', gamma, sigma_gamma);
+fprintf('Damping force coefficient (R): %.4f ± %.4f kg/s\n', R, sigma_R);
+fprintf('Initial amplitude (A0): %.4f ± %.4f m\n', A0, sigma_A0);
 
 % Plot ln(Amplitude) vs. Time with Linear Fit
 figure;
@@ -185,21 +207,11 @@ t_fit = linspace(min(sorted_times), max(sorted_times), 100);
 ln_amplitude_fit = A + B * t_fit;
 plot(t_fit, ln_amplitude_fit, 'r-', 'LineWidth', 2, 'DisplayName', 'Linear Fit');
 xlabel('Time (s)');
-ylabel('ln(Amplitude)');
-title('Log of Amplitude vs. Time');
+ylabel('LSF Natural Log Amplitude');
+title('Fitted Log of Amplitude vs. Time');
 legend('show');
 grid on;
 hold off;
-
-% Calculate Damping Force Coefficient
-R = 2 * total_mass * gamma;
-sigma_R = 2 * total_mass * sigma_gamma;
-
-% Display Results
-fprintf('Damping coefficient (gamma): %.4f ± %.4f s^-1\n', gamma, sigma_gamma);
-fprintf('Damping force coefficient (R): %.4f ± %.4f kg/s\n', R, sigma_R);
-fprintf('Initial amplitude (A0): %.4f ± %.4f m\n', A0, sigma_A0);
-
 
 
 
