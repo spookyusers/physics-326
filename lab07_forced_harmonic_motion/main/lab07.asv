@@ -1,16 +1,43 @@
 % PreLab Work Lab 07 Forced Harmonic Motion
 % Kym Derriman
 
+%% Case 1: Without damping disk
+
+M_D = .3274; % mass disk kg
+M_A = .200; % mass it takes to have omega between 5-6
+
+tbl = readtable('Lab7_EvA1.txt');
+thetaArr = tbl.Angle2; % rotary arm angle data
+tArr = tbl.Time; % time array (same for both x and theta)
+omega = tbl.Velocity2; % Drive frequency (rad/s)
+
+theta_means = mean(thetaArr);
+theta_std = std(thetaArr);
+theta_stdMean= theta_std / sqrt(length(thetaArr));
+
+
+a = thetaArr >= 0;
+b = thetaArr< 0;
+c = a(1:end-1) & b(2:end);
+
+zX = tArr(c); % zero crossing times from theta data
+
+% period and uncertainty
+w = 1 ./ (theta_stdMean.^ 2);
+[T, sigmaT,~,~] = periodPhase(zX, w, 'Theta');
+
+% Calculate natural frequency
+w0 = 2*pi / T;
+fprintf('Natural Frequency: ')
+
+%plot(tArr, )
+%omega0 = sqrt(k/m); % Resonant frequency
+%v_max = omega * A;
+
 %% Tracking variables and equations from manual
 
-L = 123; % Equilibrium point
-m = 134; % Mass
-x0 = 234; % Displacement
-t = linspace(1,30,900); % Time (sample array)
-R = 123; % Damping constant
-omega = 123; % Driving frequency of external force
 
-omega0 = sqrt(k/m); % Resonant frequency
+
 xt = x0 * cos(omega0 * t);
 
 F0 = -R * Df(xt, t); % Damping force F = -R dx/dt
@@ -25,7 +52,7 @@ A = (...
 phi = atan((2*gamma*omega) / (omega^2 - omega0^2)); % Phase shift
 
 vt = Df(xt, t);
-v_max = omega * A;
+
 
 t0 = (pi/2)/omega; % Time when Damping Force maximum
 t1 = t0 - phi/omega; % Time when x reaches maximum
@@ -66,14 +93,37 @@ thetaArr = tbl.Angle2; % rotary arm angle data
 tArr = tbl.Time; % time array (same for both x and theta)
 omega = tbl.Velocity2; % Drive frequency (rad/s)
  
-
+%% Position crossing times
 % Identify corresponding peaks in both datasets (find peaks and make
 % indices match.
 
+% Find zero crossings of position with directions
+[x_crossTimes, x_crossIndices, crossingDirections] = zeroCross2(xArr, tArr);
+
+% Get positions at zero crossings of velocity
+peak_positions = xArr(x_crossIndices);
+peak_times = tArr(x_crossIndices);
+
+% Separate maxima and minima based on crossing directions
+max_indices = x_crossIndices(crossingDirections == -1);
+min_indices = x_crossIndices(crossingDirections == 1);
+
+max_positions = xArr(max_indices);
+max_times = tArr(max_indices);
+
+min_positions = xArr(min_indices);
+min_times = tArr(min_indices);
+
+% Combine maxima and minima
+all_peak_times = [max_times; min_times];
+all_peak_positions = [max_positions; min_positions];
 
 % Calculate time difference between peaks in both datasets, match indices
 % and find delta_t for corresponding index numbers.
 % Calculate the mean of the delta t's and with that calculate
+% Prepare Peak Data for Log Plotting
+[sorted_times, sort_idx] = sort(all_peak_times);
+sorted_amplitudes = abs(all_peak_positions(sort_idx));
 
 
 %% Part C
