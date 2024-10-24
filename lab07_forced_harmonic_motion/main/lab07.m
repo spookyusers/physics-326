@@ -6,29 +6,34 @@
 M_D = .3274; % mass disk kg
 M_A = .200; % mass it takes to have omega between 5-6
 
-tbl = readtable('Lab7_EvA1.txt');
-thetaArr = tbl.Angle2; % rotary arm angle data
+tbl = readtable('Lab7_EvA1.txt', 'VariableNamingRule', 'preserve');
+
+thetaArr = tbl.Angle; % rotary arm angle data
 tArr = tbl.Time; % time array (same for both x and theta)
 omega = tbl.Velocity2; % Drive frequency (rad/s)
 
+% Uncertainty
 theta_means = mean(thetaArr);
 theta_std = std(thetaArr);
 theta_stdMean= theta_std / sqrt(length(thetaArr));
 
-
+% Zero crossings
 a = thetaArr >= 0;
 b = thetaArr< 0;
 c = a(1:end-1) & b(2:end);
+crssTimes = tArr(c); % zero crossing times from theta data
 
-zX = tArr(c); % zero crossing times from theta data
+
 
 % period and uncertainty
-w = 1 ./ (theta_stdMean.^ 2);
-[T, sigmaT,~,~] = periodPhase(zX, w, 'Theta');
-
-% Calculate natural frequency
-w0 = 2*pi / T;
-fprintf('Natural Frequency: %.4f\n', w0);
+AvgPeriod = 2* mean(diff(crssTimes));
+w0 = 2*pi / T; % angular frequency
+f = 1 / T; % cycle frequency
+fprintf('---\n');
+fprintf('Average Period (T) = %.4f (s)\n',AvgPeriod);
+fprintf('Natural Angular Frequency (w0) = %.4f (rad/s)\n', w0);
+fprintf('Cycle Frequency (f) = %.4f (Hz)\n', f);
+fprintf('---\n');
 
 
 %% Tracking variables and equations from manual
