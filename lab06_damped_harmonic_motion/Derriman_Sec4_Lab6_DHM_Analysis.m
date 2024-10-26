@@ -32,13 +32,13 @@ weights = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5];
 % Plot: Displacement vs. Mass
 figure; grid on; box on;
 errorbar(weights, displArr1, pos_stdMean, 'ro', 'MarkerSize', 5, 'DisplayName', 'Data with Error Bars');
-title('Displacement vs Mass', 'FontSize', 14);
+%title('Displacement vs Mass', 'FontSize', 14);
 xlabel('Mass (kg)', 'FontSize', 11);
 ylabel('Displacement (m)', 'FontSize', 11);
 legend('Location', 'northwest');
 set(gca, 'FontSize', 12);
 
-%% Perform LSFit (Steps 5,6,7,8)
+% Perform LSFit (Steps 5,6,7,8)
 w = 1 ./ (pos_stdMean .^ 2);    % Weights for LSF
 [A, B, sigA, sigB] = calculate_linLSF(weights, displArr1, w);
 
@@ -55,7 +55,7 @@ plot(x_fit, y_fit,'k--', 'LineWidth', 1, 'DisplayName', 'Linear Fit');
 hold off;
 legend('Data with Error Bars', 'Linear Fit', 'Location', 'northwest');
 
-%% Print the Results (Step 8 Results)
+% Print the Results (Step 8 Results)
 fprintf('Parameters and Uncertainties y = A + Bx:\n');
 fprintf('----------------------------------------------------------\n');
 fprintf('Intercept (A) = %.9f ± %.6f m\n', A, sigA);
