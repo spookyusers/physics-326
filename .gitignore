@@ -1,0 +1,34 @@
+# Ignore virtual environments
+venv/
+*/venv/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*.so
+
+# Python packages
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+
+# MATLAB cache and temporary files
+*.asv
+*.mex*
+*.mexa64
+*.mexmaci64
+*.mexw64
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE/editor files
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+

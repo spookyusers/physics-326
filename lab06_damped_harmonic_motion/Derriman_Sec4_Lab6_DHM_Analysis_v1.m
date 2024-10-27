@@ -145,6 +145,7 @@ legend('Velocity vs Position');
 
 %% Part I: Paper Plate Section
 
+% Load the data
 tbl = readtable("L6_paperPlate_Oscillation.txt");
 t = tbl.Time;
 posArr = tbl.Position;
@@ -223,6 +224,17 @@ title('Fitted Log of Amplitude vs. Time');
 legend('show');
 grid on;
 hold off;
+
+% PHASE SPACE PLOT (Velocity vs. Displacement)
+figure;
+plot(displArr2, velArr, 'b'); % Plot velocity vs displacement
+title('Phase Space Plot: Velocity vs Displacement');
+xlabel('Displacement (m)');
+ylabel('Velocity (m/s)');
+legend('Damped Motion');
+grid on;
+box on;
+
 
 
 
