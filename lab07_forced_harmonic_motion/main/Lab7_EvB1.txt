@@ -1,7 +1,7 @@
-﻿Vernier Format 2
+Vernier Format 2
 Untitled.cmbl 10/24/2024 10:56:09 .
 Latest
-Time	Position	Velocity 1	Acceleration 1	Angle 2	Velocity 2	Acceleration 2
+Time	Position	Velocity 	Acceleration 	Angle 	Velocity2	Acceleration2
 t	x	v 1	acc 1	Angle 2	v 2	acc 2
 s	m	m/s	m/s²	rad	rad/s	rad/s²
 
