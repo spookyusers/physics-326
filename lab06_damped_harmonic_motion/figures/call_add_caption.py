@@ -9,9 +9,9 @@ sys.path.insert(0, str(formatting_path))
 from add_captions import add_caption
 
 # Define parameters for the captioning function
-image_path = "/home/kym/physics-326/lab06_damped_harmonic_motion/figures/logAvsT.png"
-caption_text = r"Figure 6. Plot of the natural logarithm of amplitude vs. time for damped oscillatory motion of a 500g mass with an added paper plate. The linear fit demonstrates the exponential decay of amplitude over time, characteristic of damped harmonic motion. The slope of the line provides an estimate of the damping coefficient gamma, indicating the rate of energy dissipation in the system."
-output_path = "/home/kym/physics-326/lab06_damped_harmonic_motion/figures/fig6.png"
+image_path = "/home/kym/physics-326/lab07_forced_harmonic_motion/figures/experimental_setup_lab07.png"
+caption_text = r"Figure 1. Experimental setup. Rotating lever arm drives the motion of a damped spring-mass system. Ultrasonic position sensor below and rotary motion sensor above measure data for analysis."
+output_path = "/home/kym/physics-326/lab07_forced_harmonic_motion/figures/fig1.png"
 
 # Call the function to add the caption
 add_caption(

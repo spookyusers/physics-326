@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 
-def add_caption(image_path, caption_text, output_path, font_size=12, padding=15):
+def add_caption(image_path, caption_text, output_path, font_path, font_size=12, padding=15):
+
     """
     Adds a scientific-style caption below an image, left-aligned, and saves the result.
     
@@ -16,10 +17,10 @@ def add_caption(image_path, caption_text, output_path, font_size=12, padding=15)
 
     # Use DejaVu Serif, which resembles Times New Roman
     try:
-        font = ImageFont.truetype("DejaVuSerif.ttf", font_size)
+        font = ImageFont.truetype(font_path, font_size)
     except IOError:
         font = ImageFont.load_default()
-        print("DejaVu Serif font not found, using default font.")
+        print(f"Font at {font_path} not found, using default font.")
 
     # Function to wrap text without splitting words
     def wrap_text(text, line_length, font):
