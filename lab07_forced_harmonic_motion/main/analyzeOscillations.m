@@ -1,42 +1,51 @@
-function [period, period_uncertainty, phase_diff] = analyzeOscillations(time, signal1, signal2)
-    % Analyze two oscillating signals to find period and phase difference
+% MATLAB Function: analyzeOscillations.m
+% Purpose: Analyze oscillatory behavior by identifying peaks and calculating periods and phase differences
+
+function [avgPeriod, periodError, phaseDiff] = analyzeOscillations(Time, Position, Angle2)
+    % analyzeOscillations analyzes oscillatory behavior by identifying peaks
     % Inputs:
-    %   time - time data
-    %   signal1 - first signal (reference)
-    %   signal2 - second signal (comparison)
+    %   Time - Vector of time data
+    %   Position - Shifted Position data vector (oscillates around zero)
+    %   Angle2 - Vector of Angle2 data
     % Outputs:
-    %   period - average period of signal1
-    %   period_uncertainty - standard deviation of period measurements
-    %   phase_diff - phase difference between signals (radians)
+    %   avgPeriod - Average period between oscillations
+    %   periodError - Standard deviation of the periods
+    %   phaseDiff - Average phase difference between Position and Angle2 at peaks
+
+    % Initialize arrays to store peak times and corresponding angles
+    peakTimes = [];
+    peakAngles = [];
     
-    % Basic error check
-    if length(time) ~= length(signal1) || length(time) ~= length(signal2)
-        error('All inputs must be same length')
+    % Simple peak detection: a point is a peak if it's greater than its neighbors
+    for j = 2:length(Position)-1
+        if Position(j) > Position(j-1) && Position(j) > Position(j+1)
+            peakTimes(end+1) = Time(j); %#ok<AGROW>
+            peakAngles(end+1) = Angle2(j); %#ok<AGROW>
+        end
     end
     
-    % Find zero crossings for signal1
-    pos_crossings = signal1(1:end-1) < 0 & signal1(2:end) >= 0;
-    crossing_times1 = time(pos_crossings);
-    
-    % Find zero crossings for signal2
-    pos_crossings = signal2(1:end-1) < 0 & signal2(2:end) >= 0;
-    crossing_times2 = time(pos_crossings);
-    
-    % Basic error check
-    if length(crossing_times1) < 2 || length(crossing_times2) < 2
-        error('Not enough zero crossings found')
+    % Check if enough peaks are found
+    if length(peakTimes) < 2
+        avgPeriod = NaN;
+        periodError = NaN;
+        phaseDiff = NaN;
+        warning('Not enough peaks detected to perform analysis.');
+        return;
     end
     
-    % Calculate periods from consecutive crossings
-    periods = diff(crossing_times1);
-    period = mean(periods);
-    period_uncertainty = std(periods);
+    % Calculate periods between successive peaks
+    periods = diff(peakTimes);
     
-    % Calculate phase difference
-    time_diff = mean(crossing_times2(1:min(length(crossing_times1), length(crossing_times2))) - ...
-                    crossing_times1(1:min(length(crossing_times1), length(crossing_times2))));
-    phase_diff = 2 * pi * time_diff / period;
+    % Calculate average period and standard deviation
+    avgPeriod = mean(periods);
+    periodError = std(periods);
     
-    % Normalize phase to [-pi, pi]
-    phase_diff = mod(phase_diff + pi, 2*pi) - pi;
+    % Calculate phase differences at each peak
+    % Phase difference is the Angle2 value at each peak
+    % This assumes that a positive Angle2 corresponds to a leading phase
+    % and a negative Angle2 corresponds to a lagging phase
+    phaseDiffs = peakAngles;
+    
+    % Calculate average phase difference
+    phaseDiff = mean(phaseDiffs);
 end

@@ -3,7 +3,7 @@ clc; clear; close all;
 
 % Read multiple trials for each case
 % Case 1: No disc
-trials1 = {'clean_Lab7_EvA1.txt', 'clean_Lab7_EvA2.txt', 'clean_Lab7_EvA3.txt'}; % Add all your trial files
+trials1 = {'clean_Lab7_EvA1.txt', 'clean_Lab7_EvA2.txt', 'clean_Lab7_EvA3.txt'}; 
 periods1 = zeros(length(trials1), 1);
 for i = 1:length(trials1)
     data = readtable(trials1{i});
@@ -16,7 +16,7 @@ freq1 = 1/mean(periods1);
 freq_err1 = std(1./periods1)/sqrt(length(trials1));
 
 % Case 2: Equivalent mass
-trials2 = {'clean_Lab7_EvB1.txt', 'clean_Lab7_EvB2.txt', 'clean_Lab7_EvB3.txt'}; % Add all your trial files
+trials2 = {'clean_Lab7_EvB1.txt', 'clean_Lab7_EvB2.txt', 'clean_Lab7_EvB3.txt'}; 
 periods2 = zeros(length(trials2), 1);
 for i = 1:length(trials2)
     data = readtable(trials2{i});
@@ -29,7 +29,7 @@ freq2 = 1/mean(periods2);
 freq_err2 = std(1./periods2)/sqrt(length(trials2));
 
 % Case 3: With damping disc
-trials3 = {'clean_Lab7_EvC1.txt', 'clean_Lab7_EvC2.txt', 'clean_Lab7_EvC3.txt'}; % Add all your trial files
+trials3 = {'clean_Lab7_EvC1.txt', 'clean_Lab7_EvC2.txt', 'clean_Lab7_EvC3.txt'}; 
 periods3 = zeros(length(trials3), 1);
 for i = 1:length(trials3)
     data = readtable(trials3{i});
@@ -61,7 +61,7 @@ xticklabels({'No Disc', 'Equiv Mass', 'With Disc'})
 ylabel('Frequency (Hz)')
 grid on
 
-% Optional: Plot example oscillation data from one trial of each case
+% Plot example oscillation data from one trial of each case
 figure
 plot(readtable(trials1{1}).Time, readtable(trials1{1}).Position - mean(readtable(trials1{1}).Position), 'b-', ...
      readtable(trials2{1}).Time, readtable(trials2{1}).Position - mean(readtable(trials2{1}).Position), 'r-', ...

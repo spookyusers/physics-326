@@ -16,7 +16,7 @@ data3 = readtable("clean_Lab7_EvA3.txt");
 % Analyze each case
 [period1, period_err1, phase1] = analyzeOscillations(data1.Time, ...
     data1.Position - mean(data1.Position), ...
-    data1.Angle2 - mean(data1.Angle2));  % Note: Angle2 instead of Angle
+    data1.Angle2 - mean(data1.Angle2)); 
 freq1 = 1/period1;
 
 [period2, period_err2, phase2] = analyzeOscillations(data2.Time, ...
@@ -65,6 +65,26 @@ xlabel('Time (s)')
 ylabel('Angle (rad)')
 legend('No Disk', 'Equiv Mass', 'With Disk')
 grid on
+
+% Print results
+fprintf('--------------------------------------------------------------\n')
+fprintf('Oscillation Results No Disk:\n')
+fprintf('Average Period: %.4f +- %.4f seconds\n', avgPeriod_NoDisk, periodError_NoDisk);
+fprintf('Frequency: %.4f Hertz\n', frequency_NoDisk);
+fprintf('Phase Difference: %.4f radians\n', phaseDiff_NoDisk);
+
+fprintf('--------------------------------------------------------------\n')
+fprintf('Oscillation Results with Equivalent Mass:\n')
+fprintf('Average Period: %.4f +- %.4f seconds\n', avgPeriod_EquivMass, periodError_EquivMass);
+fprintf('Frequency: %.4f Hertz\n', frequency_EquivMass);
+fprintf('Phase Difference: %.4f radians\n', phaseDiff_EquivMass);
+
+fprintf('--------------------------------------------------------------\n')
+fprintf('Oscillation Results with Disk:\n')
+fprintf('Average Period with Disk: %.4f +- %.4f seconds\n', avgPeriod_WithDisk, periodError_WithDisk);
+fprintf('Frequency No Disk: %.4f Hertz\n', frequency_WithDisk);
+fprintf('Phase Difference: %.4f radians\n', phaseDiff_WithDisk);
+
 
 %% Part 2
 % Clear everything
