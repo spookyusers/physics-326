@@ -59,42 +59,25 @@ fprintf('Frequency No Disk: %.4f Hertz\n', frequency_WithDisk);
 fprintf('Phase Difference: %.4f radians\n', phaseDiff_WithDisk);
 
 
-%%
-% Your data matrix
-data = [
-    avgPeriod_NoDisk, periodError_NoDisk, frequency_NoDisk, phaseDiff_NoDisk;
-    avgPeriod_EquivMass, periodError_EquivMass, frequency_EquivMass, phaseDiff_EquivMass;
-    avgPeriod_WithDisk, periodError_WithDisk, frequency_WithDisk, phaseDiff_WithDisk
-];
+%% Part 2
 
-% Create the formatted table
-formatPublicationTable(data, 1, 'Oscillation characteristics for three configurations', 'oscillation_results');
+% B
+% Measure the amplitude and phase of the oscillation at each motor frequency using MATLAB. 
+% For each frequency setting, measure the period of the motor. 
+% Make your measurements very carefully, taking closely spaced frequency 
+% points near the peak of the resonance where the amplitude and phase are 
+% changing rapidly so that your data can be well compared with theoretical curves
 
+Voltages = [2,3.18,4.14,4.25,4.35,4.45,4.55,4.65,4.78,4.85,4.95,5.05,5.16,5.26,5.35,6,9.5];
+Amplitude = [];
+Phase = [];
+filename_Temp = "Lab7_%.2fV.txt";
+for V = Voltages
+    data = readtable(sprintf(filename_Temp,V));
+    pos = data.Position;
+    a = max(pos);
+    Amplitude(end+1) = a;
 
-
-
-
-
-
-
-
-
-
-
-
-
-% --------------
-
-% Voltages = [2,3.18,4.14,4.25,4.35,4.45,4.55,4.65,4.78,4.85,4.95,5.05,5.16,5.26,5.35,6,9.5];
-% Amplitude = [];
-% Phase = [];
-% filename_Temp = "Lab7_%.2fV.txt";
-% for V = Voltages
-%     data = readtable(sprintf(filename_Temp,V));
-%     pos = data.Position;
-%     a = max(pos);
-%     Amplitude(end+1) = a;
-% 
-% end
+end
 
 % -------------
