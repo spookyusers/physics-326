@@ -32,3 +32,9 @@ build/
 .DS_Store
 Thumbs.db
 
+lib/
+lib64/
+pyvenv.cfg
+bin/
+include/
+lib64
