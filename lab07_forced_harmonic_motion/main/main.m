@@ -50,7 +50,7 @@ disp(results_part1);
 %% Part 2: Forced Oscillation Data Processing
 % List of driving voltages corresponding to different motor frequencies
 voltages = [3.18, 4.14, 4.25, 4.35, 4.45, 4.55, 4.65, 4.78, 4.85, ...
-            4.95, 5.05, 5.16, 5.26, 5.35, 6.00, 9.50];
+            4.95, 5.05, 5.16, 5.26, 5.35];
 
 %% Data Processing
 % Process all voltage files and collect results into a table
@@ -60,9 +60,25 @@ results_table = processAllVoltages(voltages, dataFolderPart2);
 disp('Part 2: Forced Oscillation Results Table:');
 disp(results_table);
 
-%% Plotting
-% Plot Amplitude vs. Angular Frequency
-plotAmplitudeVsFrequency(results_table.Frequency, results_table.Amplitude);
+%% Theory vs. Experiment Plots
 
-% Plot Maximum Velocity vs. Angular Frequency
-plotVelocityVsFrequency(results_table.Frequency, results_table.Vmax);
+% Collect experimental data
+frequencies_exp = results_table.Frequency;
+amplitudes_exp = results_table.Amplitude;
+phases_exp = results_table.Phase;
+v_max_exp = results_table.Vmax;
+
+% Ensure data is in column vectors
+frequencies_exp = frequencies_exp(:);
+amplitudes_exp = amplitudes_exp(:);
+phases_exp = phases_exp(:);
+v_max_exp = v_max_exp(:);
+
+% Plot Amplitude vs. Angular Frequency with Theoretical Curves
+plotAmplitudeVsFrequencyTheoretical(frequencies_exp, amplitudes_exp);
+
+% Plot Maximum Velocity vs. Angular Frequency with Theoretical Curves
+plotVelocityVsFrequencyTheoretical(frequencies_exp, v_max_exp);
+
+% Plot Phase Difference vs. Angular Frequency with Theoretical Curve
+plotPhaseVsFrequencyTheoretical(frequencies_exp, phases_exp);
