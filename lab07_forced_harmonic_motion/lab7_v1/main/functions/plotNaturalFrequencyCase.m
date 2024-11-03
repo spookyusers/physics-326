@@ -11,12 +11,12 @@ function plotNaturalFrequencyCase(filename, dataFolder, caseName)
     % Construct full file path
     filePath = fullfile(dataFolder, filename);
 
-    % Load data from file
-    data = readtable(filePath);
+    % Load data from file with original column headers preserved
+    data = readtable(filePath, 'VariableNamingRule', 'preserve');
 
-    % Extract necessary columns
-    time = data.Time;
-    position = data.Position;
+    % Extract necessary columns using original headers
+    time = data.('Time');       % Use exact header name as in the file
+    position = data.('Position'); % Use exact header name as in the file
 
     % Center the position data around zero
     position_centered = position - mean(position);

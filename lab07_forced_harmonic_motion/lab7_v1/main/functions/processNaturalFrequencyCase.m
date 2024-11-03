@@ -24,18 +24,22 @@ function [avg_period, std_period, frequency, freq_uncertainty] = ...
         error('File %s does not exist.', filePath);
     end
 
-    % Load data from file
-    data = readtable(filePath);
+    % Load data from file with original column headers preserved
+    data = readtable(filePath, 'VariableNamingRule', 'preserve');
 
-    % Verify required columns
+    % Verify required columns using exact header names
     requiredColumns = {'Time', 'Position'};
-    if ~all(ismember(requiredColumns, data.Properties.VariableNames))
-        error('Required columns are missing in %s.', filename);
+    actualColumns = data.Properties.VariableNames;
+    
+    % Check if all required columns are present
+    missingColumns = setdiff(requiredColumns, actualColumns);
+    if ~isempty(missingColumns)
+        error('Required columns are missing in %s: %s', filename, strjoin(missingColumns, ', '));
     end
 
-    % Extract necessary columns
-    time = data.Time;
-    position = data.Position;
+    % Extract necessary columns using exact header names
+    time = data.('Time');       % Access the 'Time' column
+    position = data.('Position'); % Access the 'Position' column
 
     % Center the position data around zero
     position_centered = position - mean(position);

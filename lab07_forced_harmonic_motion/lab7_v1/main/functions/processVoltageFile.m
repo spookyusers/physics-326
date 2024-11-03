@@ -28,7 +28,7 @@ function [period, amplitude, phase_diff, frequency] = processVoltageFile(voltage
     end
 
     % Load data from file
-    data = readtable(filename);
+    data = readtable(filename,'VariableNamingRule', 'preserve');
 
     % Verify required columns
     requiredColumns = {'Time', 'Position', 'Angle2'};
