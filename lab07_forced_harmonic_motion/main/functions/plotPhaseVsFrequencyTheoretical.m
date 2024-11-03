@@ -1,7 +1,8 @@
 function plotPhaseVsFrequencyTheoretical(frequencies_exp, phases_exp)
     % Define parameters
-    omega0 = mean(frequencies_exp(phases_exp == min(phases_exp)));  % Approximate resonance frequency
-    gamma = 1.0;  % Adjusted damping coefficient for best fit
+    omega0 = 5.1441; % from experimental data w highest amplitude
+    %omega0 = mean(frequencies_exp(phases_exp == min(phases_exp)));  % Approximate resonance frequency
+    gamma = .7;  % Adjusted damping coefficient for best fit
     omega = linspace(min(frequencies_exp)*0.9, max(frequencies_exp)*1.1, 1000);  % Frequency range
 
     % Calculate theoretical phase shift

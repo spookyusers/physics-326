@@ -1,4 +1,4 @@
-% main.m
+% main_week1.m
 % Main Script for Processing Forced Oscillation Data (Lab 7 and 8 Analysis)
 % Author: Kym Derriman
 % Date: [Insert Date]
@@ -52,13 +52,14 @@ disp(results_part1);
 voltages = [3.18, 4.14, 4.25, 4.35, 4.45, 4.55, 4.65, 4.78, 4.85, ...
             4.95, 5.05, 5.16, 5.26, 5.35];
 
-%% Data Processing
 % Process all voltage files and collect results into a table
 results_table = processAllVoltages(voltages, dataFolderPart2);
 
-%% Display Results
+% Display Results
 disp('Part 2: Forced Oscillation Results Table:');
 disp(results_table);
+
+% highest amplitude shown at 4.85V with amp = 0.16159, freq = 5.1441
 
 %% Theory vs. Experiment Plots
 
@@ -74,11 +75,26 @@ amplitudes_exp = amplitudes_exp(:);
 phases_exp = phases_exp(:);
 v_max_exp = v_max_exp(:);
 
-% Plot Amplitude vs. Angular Frequency with Theoretical Curves
+%% Plot Amplitude vs. Angular Frequency with Theoretical Curves
 plotAmplitudeVsFrequencyTheoretical(frequencies_exp, amplitudes_exp);
 
-% Plot Maximum Velocity vs. Angular Frequency with Theoretical Curves
+%% Plot Maximum Velocity vs. Angular Frequency with Theoretical Curves
 plotVelocityVsFrequencyTheoretical(frequencies_exp, v_max_exp);
 
-% Plot Phase Difference vs. Angular Frequency with Theoretical Curve
+%% Plot Phase Difference vs. Angular Frequency with Theoretical Curve
 plotPhaseVsFrequencyTheoretical(frequencies_exp, phases_exp);
+
+%% Part E: Improved Estimation Method
+% % Define the theoretical model function
+% modelFun = @(params, omega) params(1) ./ sqrt((params(2)^2 - omega.^2).^2 + (params(3) .* omega).^2);
+% 
+% % Initial guesses for [F0_over_m, omega0, gamma]
+% initialGuess = [max(amplitudes), 5, 0.5];
+% 
+% % Perform curve fitting
+% params_estimated = lsqcurvefit(modelFun, initialGuess, frequencies, amplitudes);
+% 
+% % Extract estimated parameters
+% F0_over_m_est = params_estimated(1);
+% omega0_est = params_estimated(2);
+% gamma_est = params_estimated(3);
