@@ -22,8 +22,8 @@ function plotVelocityVsFrequencyTheoretical(frequencies_exp, v_max_exp)
     plot(frequencies_exp, v_max_exp, 'ko', 'MarkerFaceColor', 'k', 'MarkerSize', 6);
 
     % Labels and title
-    xlabel('Angular Frequency \omega (rad/s)', 'FontSize', 14);
-    ylabel('Maximum Velocity v_{max} (m/s)', 'FontSize', 14);
+    xlabel('Angular Frequency omega (rad/s)', 'FontSize', 14);
+    ylabel('Maximum Velocity vmax (m/s)', 'FontSize', 14);
     title('Maximum Velocity vs. Angular Frequency', 'FontSize', 16);
 
     % Legend
