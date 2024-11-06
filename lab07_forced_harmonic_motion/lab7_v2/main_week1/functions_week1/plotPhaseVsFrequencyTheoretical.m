@@ -1,7 +1,6 @@
 function plotPhaseVsFrequencyTheoretical(frequencies_exp, phases_exp)
     % Define parameters
     omega0 = 5.1441; % from experimental data w highest amplitude
-    %omega0 = mean(frequencies_exp(phases_exp == min(phases_exp)));  % Approximate resonance frequency
     gamma = .7;  % Adjusted damping coefficient for best fit
     omega = linspace(min(frequencies_exp)*0.9, max(frequencies_exp)*1.1, 1000);  % Frequency range
 
@@ -19,8 +18,8 @@ function plotPhaseVsFrequencyTheoretical(frequencies_exp, phases_exp)
     plot(frequencies_exp, phases_exp, 'ko', 'MarkerFaceColor', 'k', 'MarkerSize', 6);
 
     % Labels and title
-    xlabel('Angular Frequency \omega (rad/s)', 'FontSize', 14);
-    ylabel('Phase Difference \phi (rad)', 'FontSize', 14);
+    xlabel('Angular Frequency omega (rad/s)', 'FontSize', 14);
+    ylabel('Phase Difference phi (rad)', 'FontSize', 14);
     title('Phase Difference vs. Angular Frequency', 'FontSize', 16);
 
     % Legend

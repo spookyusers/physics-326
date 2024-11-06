@@ -1,7 +1,7 @@
 function plotAmplitudeVsFrequencyTheoretical(frequencies_exp, amplitudes_exp)
     % Define parameters
     omega0 = mean(frequencies_exp(amplitudes_exp == max(amplitudes_exp)));  % Resonance frequency
-    gamma_values = [0.5];  % Adjusted damping coefficient for best fit
+    gamma_values = 0.5;  % Adjusted damping coefficient for best fit
     omega = linspace(min(frequencies_exp)*0.9, max(frequencies_exp)*1.1, 1000);  % Frequency range
 
     % Determine scaling factor
@@ -22,7 +22,7 @@ function plotAmplitudeVsFrequencyTheoretical(frequencies_exp, amplitudes_exp)
     plot(frequencies_exp, amplitudes_exp, 'ko', 'MarkerFaceColor', 'k', 'MarkerSize', 6);
 
     % Labels and title
-    xlabel('Angular Frequency \omega (rad/s)', 'FontSize', 14);
+    xlabel('Angular Frequency omega (rad/s)', 'FontSize', 14);
     ylabel('Amplitude A (m)', 'FontSize', 14);
     title('Amplitude vs. Angular Frequency', 'FontSize', 16);
 

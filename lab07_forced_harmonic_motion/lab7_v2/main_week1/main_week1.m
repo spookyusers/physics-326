@@ -8,11 +8,11 @@
 clear; close all; clc;
 
 % Add functions directory to MATLAB path
-addpath('functions');
+addpath('functions_week1');
 
 % Define data folders
-dataFolderPart1 = fullfile('main_week1','data_week1', 'part1');
-dataFolderPart2 = fullfile('main_week1', 'data_week1', 'part2');
+dataFolderPart1 = fullfile('data_week1', 'part1');
+dataFolderPart2 = fullfile('data_week1', 'part2');
 %% Part 1: Natural Frequency Analysis
 % List of cases and corresponding data files
 cases = {'No Mass', 'Equivalent Mass', 'With Disk'};
@@ -86,18 +86,3 @@ plotVelocityVsFrequencyTheoretical(frequencies_exp, v_max_exp);
 
 %% Plot Phase Difference vs. Angular Frequency with Theoretical Curve
 plotPhaseVsFrequencyTheoretical(frequencies_exp, phases_exp);
-
-%% Part E: Improved Estimation Method
-% % Define the theoretical model function
-% modelFun = @(params, omega) params(1) ./ sqrt((params(2)^2 - omega.^2).^2 + (params(3) .* omega).^2);
-% 
-% % Initial guesses for [F0_over_m, omega0, gamma]
-% initialGuess = [max(amplitudes), 5, 0.5];
-% 
-% % Perform curve fitting
-% params_estimated = lsqcurvefit(modelFun, initialGuess, frequencies, amplitudes);
-% 
-% % Extract estimated parameters
-% F0_over_m_est = params_estimated(1);
-% omega0_est = params_estimated(2);
-% gamma_est = params_estimated(3);

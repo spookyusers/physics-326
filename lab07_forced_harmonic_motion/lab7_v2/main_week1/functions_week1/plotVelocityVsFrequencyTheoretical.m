@@ -1,14 +1,11 @@
 function plotVelocityVsFrequencyTheoretical(frequencies_exp, v_max_exp)
     % Define parameters
-    omega0 = mean(frequencies_exp(v_max_exp == max(v_max_exp)));  % Resonance frequency from experimental data
-    gamma_values = [0.7];  % Adjusted damping coefficient for best fit
+    omega0 = mean(frequencies_exp(v_max_exp == max(v_max_exp)));  % Resonance freq from experimental data
+    gamma_values = 0.7;  % Adjusted damping coefficient for best fit
     omega = linspace(min(frequencies_exp)*0.9, max(frequencies_exp)*1.1, 1000);  % Frequency range
 
-    % Determine scaling factor
-    F0_over_m = max(v_max_exp) * sqrt((omega0^2 - omega0^2)^2 + (gamma_values(1) * omega0)^2) / (gamma_values(1) * omega0);
-    if isempty(F0_over_m) || isnan(F0_over_m)
-        F0_over_m = max(v_max_exp);
-    end
+    % Scaling factor
+    F0_over_m = max(v_max_exp);
 
     % Initialize figure
     figure('Position', [100, 100, 800, 500]);
