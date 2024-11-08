@@ -93,3 +93,4 @@ plotVelocityVsFrequencyTheoretical(omega_exp, v_max_exp);
 
 %% Plot Phase Difference vs. Angular Frequency with Theoretical Curve
 plotPhaseVsFrequencyTheoretical(omega_exp, phases_exp, omega0);
+
