@@ -1,4 +1,5 @@
 % Section B: Sawtooth Wave Synthesis
+clear; close all; clc;
 
 % Parameters
 T = 1;          % Period (seconds)
