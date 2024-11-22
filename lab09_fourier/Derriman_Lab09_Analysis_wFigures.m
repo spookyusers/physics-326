@@ -1,10 +1,16 @@
-% Combined MATLAB Code for Lab Parts A–F
+% Combined MATLAB Code for Lab Parts A–F with Adjusted Figures and Captions
 
 % Initialize the environment
 clc; clear; close all;
 
 % Set the root path relative to the current working directory
 root_path = './data';
+figure_folder = './figures';  % Folder to save figures
+
+% Create the figures directory if it doesn't exist
+if ~exist(figure_folder, 'dir')
+    mkdir(figure_folder);
+end
 
 %% Part A: Square Wave Synthesis
 % Synthesizes a square wave using Fourier series and plots the
@@ -30,17 +36,35 @@ for idx = 1:length(N_values_A)
 end
 
 % Plotting the harmonic sums
-figure;
+figure('Position', [100, 100, 800, 700]); % Increase figure height
 plot(t_A, y_sums_A(1,:), 'b-', 'LineWidth', 1.5); hold on;
 plot(t_A, y_sums_A(2,:), 'r--', 'LineWidth', 1.5);
 plot(t_A, y_sums_A(3,:), 'g-.', 'LineWidth', 1.5);
 plot(t_A, y_sums_A(4,:), 'k:', 'LineWidth', 1.5);
 plot(t_A, y_sums_A(5,:), 'm-', 'LineWidth', 1.5);
 grid on;
-legend('N=1', 'N=3', 'N=5', 'N=7', 'N=9');
-xlabel('Time (s)');
+legend('N=1', 'N=3', 'N=5', 'N=7', 'N=9', 'Location', 'northwest');
 ylabel('Amplitude');
-title('Square Wave Synthesis with Increasing Number of Harmonics');
+
+% Remove x-axis label
+% xlabel('Time (s)');
+
+% Adjust axes position to make room for caption
+ax = gca;
+ax.Position = [0.13, 0.25, 0.775, 0.65];
+
+% Add caption as text box below the plot
+caption = {'Figure 1: Square Wave Synthesis with Increasing Number of Harmonics', ...
+    'This figure illustrates the approximation of a square wave by summing odd harmonics up to N=9 using Fourier series.', ...
+    'Time is in seconds along the horizontal axis.'};
+annotation('textbox', [0.13, 0.1, 0.775, 0.12], 'String', caption, 'EdgeColor', 'none', ...
+    'HorizontalAlignment', 'center', 'VerticalAlignment', 'top', 'FontSize', 10);
+
+% Disable axes toolbar
+ax.Toolbar.Visible = 'off';
+
+% Save the figure
+exportgraphics(gcf, fullfile(figure_folder, 'Figure1_SquareWaveSynthesis.png'));
 
 %% Part B: Sawtooth Wave Synthesis
 % Synthesizes a sawtooth wave using Fourier series and compares
@@ -62,15 +86,33 @@ for n = N_B
 end
 
 % Plotting the exact and approximated sawtooth wave
-figure;
+figure('Position', [100, 100, 800, 700]); % Increase figure height
 plot(t_B, f_exact_B, 'k-', 'LineWidth', 1.5, 'DisplayName', 'Exact Sawtooth');
 hold on;
 plot(t_B, f_fourier_B, 'r--', 'LineWidth', 1.5, 'DisplayName', 'Fourier Approximation (n=5)');
 grid on;
-xlabel('Time (s)');
 ylabel('Amplitude');
-title('Sawtooth Wave: Exact vs Fourier Series Approximation');
-legend('Location', 'best');
+legend('Location', 'northwest');
+
+% Remove x-axis label
+% xlabel('Time (s)');
+
+% Adjust axes position to make room for caption
+ax = gca;
+ax.Position = [0.13, 0.25, 0.775, 0.65];
+
+% Add caption as text box below the plot
+caption = {'Figure 2: Sawtooth Wave - Exact vs Fourier Series Approximation', ...
+    'This figure compares the exact sawtooth wave with its Fourier series approximation using up to n=5 harmonics.', ...
+    'Time is in seconds along the horizontal axis.'};
+annotation('textbox', [0.13, 0.1, 0.775, 0.12], 'String', caption, 'EdgeColor', 'none', ...
+    'HorizontalAlignment', 'center', 'VerticalAlignment', 'top', 'FontSize', 10);
+
+% Disable axes toolbar
+ax.Toolbar.Visible = 'off';
+
+% Save the figure
+exportgraphics(gcf, fullfile(figure_folder, 'Figure2_SawtoothWaveSynthesis.png'));
 
 %% Part D: Square and Triangular Wave Analysis
 % Analyzes the frequency components of square and triangular waves
@@ -98,24 +140,46 @@ harmonic_freqs_D = 1000 * n_values_D;  % in Hz
 [~, indices_D] = arrayfun(@(f) min(abs(freq_D - f)), harmonic_freqs_D);
 fft_magnitudes_square_D = mag_square_D(indices_D);
 
-% Plot time-domain square wave
-figure;
+% Plot time-domain square wave and frequency spectrum
+figure('Position', [100, 100, 800, 700]); % Increase figure height
 subplot(2,1,1);
 plot(t_D*1000, square_wave_D, 'b-');
-xlabel('Time (ms)');
 ylabel('Amplitude');
-title('Square Wave - Time Domain');
 grid on;
 
-% Plot FFT magnitudes and theoretical coefficients for square wave
+% Remove x-axis label
+% xlabel('Time (ms)');
+
 subplot(2,1,2);
 stem(freq_D(indices_D)/1000, fft_magnitudes_square_D, 'b', 'LineWidth', 1.5); hold on;
 stem(freq_D(indices_D)/1000, An_D, 'r--', 'LineWidth', 1.5);
-xlabel('Frequency (kHz)');
 ylabel('Magnitude');
-title('Square Wave: FFT Magnitudes vs Theoretical Fourier Coefficients');
 legend('FFT Magnitudes', 'Theoretical Coefficients');
 grid on;
+
+% Remove x-axis label
+% xlabel('Frequency (kHz)');
+
+% Adjust subplot positions to make room for caption
+subplot(2,1,1);
+ax1 = gca;
+ax1.Position = [0.13, 0.55, 0.775, 0.35];
+subplot(2,1,2);
+ax2 = gca;
+ax2.Position = [0.13, 0.3, 0.775, 0.2];
+
+% Add caption as text box below the plots
+caption = {'Figure 3: Square Wave - Time Domain and Frequency Spectrum', ...
+    'The upper plot shows the time-domain square wave (Time in ms), and the lower plot compares FFT magnitudes with theoretical Fourier coefficients (Frequency in kHz).'};
+annotation('textbox', [0.13, 0.1, 0.775, 0.15], 'String', caption, 'EdgeColor', 'none', ...
+    'HorizontalAlignment', 'center', 'VerticalAlignment', 'top', 'FontSize', 10);
+
+% Disable axes toolbars
+ax1.Toolbar.Visible = 'off';
+ax2.Toolbar.Visible = 'off';
+
+% Save the figure
+exportgraphics(gcf, fullfile(figure_folder, 'Figure3_SquareWaveAnalysis.png'));
 
 % Triangular Wave Analysis
 triangular_wave_D = sawtooth(2*pi*1000*t_D, 0.5);  % Symmetric triangle wave
@@ -124,24 +188,46 @@ mag_triangle_D = 2*abs(fft_triangle_D(1:nyq_D));
 Bn_D = (8./(pi^2)) .* ((-1).^((n_values_D-1)/2)) ./ (n_values_D.^2);
 fft_magnitudes_triangle_D = mag_triangle_D(indices_D);
 
-% Plot time-domain triangular wave
-figure;
+% Plot time-domain triangular wave and frequency spectrum
+figure('Position', [100, 100, 800, 700]); % Increase figure height
 subplot(2,1,1);
 plot(t_D*1000, triangular_wave_D, 'b-');
-xlabel('Time (ms)');
 ylabel('Amplitude');
-title('Triangular Wave - Time Domain');
 grid on;
 
-% Plot FFT magnitudes and theoretical coefficients for triangular wave
+% Remove x-axis label
+% xlabel('Time (ms)');
+
 subplot(2,1,2);
 stem(freq_D(indices_D)/1000, fft_magnitudes_triangle_D, 'b', 'LineWidth', 1.5); hold on;
 stem(freq_D(indices_D)/1000, abs(Bn_D), 'r--', 'LineWidth', 1.5);
-xlabel('Frequency (kHz)');
 ylabel('Magnitude');
-title('Triangular Wave: FFT Magnitudes vs Theoretical Fourier Coefficients');
 legend('FFT Magnitudes', 'Theoretical Coefficients');
 grid on;
+
+% Remove x-axis label
+% xlabel('Frequency (kHz)');
+
+% Adjust subplot positions to make room for caption
+subplot(2,1,1);
+ax1 = gca;
+ax1.Position = [0.13, 0.55, 0.775, 0.35];
+subplot(2,1,2);
+ax2 = gca;
+ax2.Position = [0.13, 0.3, 0.775, 0.2];
+
+% Add caption as text box below the plots
+caption = {'Figure 4: Triangular Wave - Time Domain and Frequency Spectrum', ...
+    'The upper plot shows the time-domain triangular wave (Time in ms), and the lower plot compares FFT magnitudes with theoretical Fourier coefficients (Frequency in kHz).'};
+annotation('textbox', [0.13, 0.1, 0.775, 0.15], 'String', caption, 'EdgeColor', 'none', ...
+    'HorizontalAlignment', 'center', 'VerticalAlignment', 'top', 'FontSize', 10);
+
+% Disable axes toolbars
+ax1.Toolbar.Visible = 'off';
+ax2.Toolbar.Visible = 'off';
+
+% Save the figure
+exportgraphics(gcf, fullfile(figure_folder, 'Figure4_TriangularWaveAnalysis.png'));
 
 %% Part E: Tuning Fork Analysis
 % Analyzes tuning fork data from the oscilloscope and SR760 spectrum analyzer.
@@ -161,6 +247,7 @@ tuning_forks_E = {
 for i = 1:size(tuning_forks_E, 1)
     freq_label_E = tuning_forks_E{i, 1};
     note_E = tuning_forks_E{i, 2};
+    figure_number = 5 + (i-1)*2;  % To assign figure numbers correctly
 
     % Time-Domain Data Analysis
     data_folder_E = fullfile(oscill_folder_E, freq_label_E);
@@ -178,12 +265,29 @@ for i = 1:size(tuning_forks_E, 1)
     voltage_E = data_E(:, 5);     % Voltage in volts
 
     % Plot the time-domain waveform
-    figure;
+    figure('Position', [100, 100, 800, 700]); % Increase figure height
     plot(time_E * 1000, voltage_E, 'b-');
-    xlabel('Time (ms)');
     ylabel('Voltage (V)');
-    title(sprintf('Time-Domain Waveform of %s Tuning Fork (%s Hz)', note_E, freq_label_E));
     grid on;
+
+    % Remove x-axis label
+    % xlabel('Time (ms)');
+
+    % Adjust axes position to make room for caption
+    ax = gca;
+    ax.Position = [0.13, 0.3, 0.775, 0.6];
+
+    % Add caption as text box below the plot
+    caption = {sprintf('Figure %d: Time-Domain Waveform of %s Tuning Fork', figure_number, note_E), ...
+        sprintf('This figure displays the time-domain waveform of the %s tuning fork (%s Hz). Time is in milliseconds along the horizontal axis.', note_E, freq_label_E)};
+    annotation('textbox', [0.13, 0.11, 0.775, 0.15], 'String', caption, 'EdgeColor', 'none', ...
+        'HorizontalAlignment', 'center', 'VerticalAlignment', 'top', 'FontSize', 10);
+
+    % Disable axes toolbar
+    ax.Toolbar.Visible = 'off';
+
+    % Save the figure
+    exportgraphics(gcf, fullfile(figure_folder, sprintf('Figure%d_TuningFork_%s_TimeDomain.png', figure_number, note_E)));
 
     % Frequency-Domain Analysis using FFT
     Ts_E = time_E(2) - time_E(1);
@@ -203,23 +307,39 @@ for i = 1:size(tuning_forks_E, 1)
         sr_magnitude_E = sr760_data_E(:, 2);
 
         % Plot comparison of FFT and SR760 spectra
-        figure;
+        figure('Position', [100, 100, 800, 700]); % Increase figure height
         semilogy(freq_E, magnitude_E, 'b-', sr_freq_E, sr_magnitude_E, 'r--');
-        xlabel('Frequency (Hz)');
         ylabel('Magnitude');
-        title(sprintf('Frequency Spectrum of %s Tuning Fork (%s Hz)', note_E, freq_label_E));
         legend('FFT Spectrum', 'SR760 Spectrum');
         grid on;
         xlim([0, 1500]);  % Limit x-axis to 1500 Hz
     else
-        figure;
+        figure('Position', [100, 100, 800, 700]); % Increase figure height
         semilogy(freq_E, magnitude_E, 'b-');
-        xlabel('Frequency (Hz)');
         ylabel('Magnitude');
-        title(sprintf('FFT Spectrum of %s Tuning Fork (%s Hz)', note_E, freq_label_E));
         grid on;
         xlim([0, 1500]);
     end
+
+    % Remove x-axis label
+    % xlabel('Frequency (Hz)');
+
+    % Adjust axes position to make room for caption
+    ax = gca;
+    ax.Position = [0.13, 0.3, 0.775, 0.6];
+
+    % Add caption as text box below the plot
+    caption = {sprintf('Figure %d: Frequency Spectrum of %s Tuning Fork', figure_number+1, note_E), ...
+        sprintf('This figure presents the frequency spectrum of the %s tuning fork (%s Hz), comparing FFT and SR760 data.', note_E, freq_label_E), ...
+        'Frequency is in Hz along the horizontal axis.'};
+    annotation('textbox', [0.13, 0.11, 0.775, 0.15], 'String', caption, 'EdgeColor', 'none', ...
+        'HorizontalAlignment', 'center', 'VerticalAlignment', 'top', 'FontSize', 10);
+
+    % Disable axes toolbar
+    ax.Toolbar.Visible = 'off';
+
+    % Save the figure
+    exportgraphics(gcf, fullfile(figure_folder, sprintf('Figure%d_TuningFork_%s_FrequencySpectrum.png', figure_number+1, note_E)));
 end
 
 %% Part F: Voice Analysis
@@ -241,6 +361,7 @@ for i = 1:size(voice_samples_F, 1)
     oscill_label_F = voice_samples_F{i, 1};
     spect_file_name_F = voice_samples_F{i, 2};
     description_F = voice_samples_F{i, 3};
+    figure_number = 11 + (i-1)*2;  % To assign figure numbers correctly
 
     % Time-Domain Data Analysis
     data_folder_F = fullfile(oscill_folder_F, oscill_label_F);
@@ -258,12 +379,29 @@ for i = 1:size(voice_samples_F, 1)
     voltage_F = data_F(:, 5);     % Voltage in volts
 
     % Plot the time-domain waveform
-    figure;
+    figure('Position', [100, 100, 800, 700]); % Increase figure height
     plot(time_F * 1000, voltage_F, 'b-');
-    xlabel('Time (ms)');
     ylabel('Voltage (V)');
-    title(sprintf('Time-Domain Waveform of %s', description_F));
     grid on;
+
+    % Remove x-axis label
+    % xlabel('Time (ms)');
+
+    % Adjust axes position to make room for caption
+    ax = gca;
+    ax.Position = [0.13, 0.3, 0.775, 0.6];
+
+    % Add caption as text box below the plot
+    caption = {sprintf('Figure %d: Time-Domain Waveform of %s', figure_number, description_F), ...
+        sprintf('This figure displays the time-domain waveform of the %s voice sample. Time is in milliseconds along the horizontal axis.', description_F)};
+    annotation('textbox', [0.13, 0.11, 0.775, 0.15], 'String', caption, 'EdgeColor', 'none', ...
+        'HorizontalAlignment', 'center', 'VerticalAlignment', 'top', 'FontSize', 10);
+
+    % Disable axes toolbar
+    ax.Toolbar.Visible = 'off';
+
+    % Save the figure
+    exportgraphics(gcf, fullfile(figure_folder, sprintf('Figure%d_Voice_%s_TimeDomain.png', figure_number, description_F)));
 
     % Frequency-Domain Analysis using FFT
     Ts_F = time_F(2) - time_F(1);
@@ -283,21 +421,36 @@ for i = 1:size(voice_samples_F, 1)
         sr_magnitude_F = sr760_data_F(:, 2);
 
         % Plot comparison of FFT and SR760 spectra
-        figure;
+        figure('Position', [100, 100, 800, 700]); % Increase figure height
         semilogy(freq_F, magnitude_F, 'b-', sr_freq_F, sr_magnitude_F, 'r--');
-        xlabel('Frequency (Hz)');
         ylabel('Magnitude');
-        title(sprintf('Frequency Spectrum of %s', description_F));
         legend('FFT Spectrum', 'SR760 Spectrum');
         grid on;
         xlim([0, 1500]);  % Limit x-axis to 1500 Hz
     else
-        figure;
+        figure('Position', [100, 100, 800, 700]); % Increase figure height
         semilogy(freq_F, magnitude_F, 'b-');
-        xlabel('Frequency (Hz)');
         ylabel('Magnitude');
-        title(sprintf('FFT Spectrum of %s', description_F));
         grid on;
         xlim([0, 1500]);
     end
+
+    % Remove x-axis label
+    % xlabel('Frequency (Hz)');
+
+    % Adjust axes position to make room for caption
+    ax = gca;
+    ax.Position = [0.13, 0.3, 0.775, 0.6];
+
+    % Add caption as text box below the plot
+    caption = {sprintf('Figure %d: Frequency Spectrum of %s', figure_number+1, description_F), ...
+        sprintf('This figure presents the frequency spectrum of the %s voice sample, comparing FFT and SR760 data. Frequency is in Hz along the horizontal axis.', description_F)};
+    annotation('textbox', [0.13, 0.11, 0.775, 0.15], 'String', caption, 'EdgeColor', 'none', ...
+        'HorizontalAlignment', 'center', 'VerticalAlignment', 'top', 'FontSize', 10);
+
+    % Disable axes toolbar
+    ax.Toolbar.Visible = 'off';
+
+    % Save the figure
+    exportgraphics(gcf, fullfile(figure_folder, sprintf('Figure%d_Voice_%s_FrequencySpectrum.png', figure_number+1, description_F)));
 end
