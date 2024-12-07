@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[    140237,       3251]
-NotebookOptionsPosition[    127975,       3052]
-NotebookOutlinePosition[    128369,       3068]
-CellTagsIndexPosition[    128326,       3065]
+NotebookDataLength[    139912,       3244]
+NotebookOptionsPosition[    127748,       3046]
+NotebookOutlinePosition[    128142,       3062]
+CellTagsIndexPosition[    128099,       3059]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -762,102 +762,98 @@ values of ",
   3.942530323548855*^9}},ExpressionUUID->"06f1e404-ac12-4be3-9621-\
 a1725baa2fd5"],
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{"plotLogisticMap", "[", 
-   RowBox[{"a_", ",", "initialConditions_"}], "]"}], ":=", " ", 
-  RowBox[{"Module", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"data", ",", "plots"}], "}"}], ",", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"data", "=", 
-      RowBox[{"Table", "[", "\[IndentingNewLine]", 
-       RowBox[{
-        RowBox[{"logisticIteration", "[", 
-         RowBox[{"x0", ",", "a", ",", "20"}], "]"}], ",", 
-        "\[IndentingNewLine]", 
-        RowBox[{"{", 
-         RowBox[{"x0", ",", "initialConditions"}], "}"}]}], 
-       "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
-     RowBox[{"ListLinePlot", "[", 
-      RowBox[{"data", ",", "\[IndentingNewLine]", 
-       RowBox[{"PlotRange", "->", "All"}], ",", "\[IndentingNewLine]", 
-       RowBox[{"Frame", "->", "True"}], ",", "\[IndentingNewLine]", 
-       RowBox[{"FrameLabel", "->", 
-        RowBox[{"{", 
-         RowBox[{
-         "\"\<n\>\"", ",", "\"\<\!\(\*SubscriptBox[\(x\), \(n\)]\)\>\""}], 
-         "}"}]}], ",", "\[IndentingNewLine]", 
-       RowBox[{"PlotLegends", "->", 
-        RowBox[{"Map", "[", "\[IndentingNewLine]", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"StringForm", "[", 
-            RowBox[{"\"\<\!\(\*SubscriptBox[\(x\), \(0\)]\)=``\>\"", ",", 
-             RowBox[{"NumberForm", "[", 
-              RowBox[{"#", ",", 
-               RowBox[{"{", 
-                RowBox[{"4", ",", "3"}], "}"}]}], "]"}]}], "]"}], "&"}], ",", 
-          "\[IndentingNewLine]", "initialConditions"}], "\[IndentingNewLine]",
-          "]"}]}], ",", "\[IndentingNewLine]", 
-       RowBox[{"PlotLabel", "->", 
-        RowBox[{"StringForm", "[", 
-         RowBox[{"\"\<Logistic Map (a=``)\>\"", ",", "a"}], "]"}]}]}], 
-      "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", 
-   "]"}]}]], "Input",
- CellChangeTimes->{{3.94253033664715*^9, 3.9425307022843523`*^9}, 
-   3.9425312550223227`*^9},
- CellLabel->
-  "In[192]:=",ExpressionUUID->"953f2797-ed59-461e-a990-f0ce6c9682c8"],
-
 Cell[CellGroupData[{
 
-Cell[BoxData[
+Cell[BoxData[{
  RowBox[{
+  RowBox[{
+   RowBox[{"plotLogisticMap", "[", 
+    RowBox[{"a_", ",", "initialConditions_"}], "]"}], ":=", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"data", ",", "plots"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"data", "=", 
+       RowBox[{"Table", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"logisticIteration", "[", 
+          RowBox[{"x0", ",", "a", ",", "20"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{"x0", ",", "initialConditions"}], "}"}]}], 
+        "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ListLinePlot", "[", 
+       RowBox[{"data", ",", "\[IndentingNewLine]", 
+        RowBox[{"PlotRange", "->", "All"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"Frame", "->", "True"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"FrameLabel", "->", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<n\>\"", ",", "\"\<\!\(\*SubscriptBox[\(x\), \(n\)]\)\>\""}], 
+          "}"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"PlotLegends", "->", 
+         RowBox[{"Map", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"StringForm", "[", 
+             RowBox[{"\"\<\!\(\*SubscriptBox[\(x\), \(0\)]\)=``\>\"", ",", 
+              RowBox[{"NumberForm", "[", 
+               RowBox[{"#", ",", 
+                RowBox[{"{", 
+                 RowBox[{"4", ",", "3"}], "}"}]}], "]"}]}], "]"}], "&"}], ",",
+            "\[IndentingNewLine]", "initialConditions"}], 
+          "\[IndentingNewLine]", "]"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"PlotLabel", "->", 
+         RowBox[{"StringForm", "[", 
+          RowBox[{"\"\<Logistic Map (a=``)\>\"", ",", "a"}], "]"}]}]}], 
+       "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
   RowBox[{"(*", 
    RowBox[{
    "Generate", " ", "3", " ", "random", " ", "initial", " ", "conditions", 
-    " ", "between", " ", "0", " ", "and", " ", "1"}], "*)"}], 
-  "\[IndentingNewLine]", 
+    " ", "between", " ", "0", " ", "and", " ", "1"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
   RowBox[{
+   RowBox[{"SeedRandom", "[", "42", "]"}], ";"}], "  ", 
+  RowBox[{"(*", 
+   RowBox[{"for", " ", "reproducibility"}], "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"initialConditions", "=", 
+    RowBox[{"RandomReal", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0", ",", "1"}], "}"}], ",", "3"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
    RowBox[{
-    RowBox[{"SeedRandom", "[", "42", "]"}], ";"}], "  ", 
-   RowBox[{"(*", 
-    RowBox[{"for", " ", "reproducibility"}], "*)"}], "\n", 
-   RowBox[{
-    RowBox[{"initialConditions", "=", 
-     RowBox[{"RandomReal", "[", 
+   "Create", " ", "plots", " ", "for", " ", "each", " ", "value", " ", "of", 
+    " ", "a"}], "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"aValues", "=", 
+   RowBox[{"{", 
+    RowBox[{"0.5", ",", "1", ",", "1.5", ",", "2.9"}], "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"plots", "=", 
+    RowBox[{"Map", "[", 
+     RowBox[{
       RowBox[{
-       RowBox[{"{", 
-        RowBox[{"0", ",", "1"}], "}"}], ",", "3"}], "]"}]}], ";"}], "\n", 
-   "\[IndentingNewLine]", 
-   RowBox[{"(*", 
-    RowBox[{
-    "Create", " ", "plots", " ", "for", " ", "each", " ", "value", " ", "of", 
-     " ", "a"}], "*)"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"aValues", "=", 
-     RowBox[{"{", 
-      RowBox[{"0.5", ",", "1", ",", "1.5", ",", "2.9"}], "}"}]}], ";"}], "\n", 
-   RowBox[{
-    RowBox[{"plots", "=", 
-     RowBox[{"Map", "[", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"plotLogisticMap", "[", 
-         RowBox[{"#", ",", "initialConditions"}], "]"}], "&"}], ",", 
-       "aValues"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
-   RowBox[{"(*", 
-    RowBox[{"Display", " ", "plots", " ", "in", " ", "a", " ", "grid"}], 
-    "*)"}], "\[IndentingNewLine]", 
-   RowBox[{"Grid", "[", 
-    RowBox[{"Partition", "[", 
-     RowBox[{"plots", ",", "2"}], "]"}], "]"}]}]}]], "Input",
- CellChangeTimes->{{3.942531287462562*^9, 3.942531295713735*^9}, {
-   3.942531375636071*^9, 3.942531422838051*^9}, 3.9425314738702517`*^9},
+       RowBox[{"plotLogisticMap", "[", 
+        RowBox[{"#", ",", "initialConditions"}], "]"}], "&"}], ",", 
+      "aValues"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Display", " ", "plots", " ", "in", " ", "a", " ", "grid"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Grid", "[", 
+  RowBox[{"Partition", "[", 
+   RowBox[{"plots", ",", "2"}], "]"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.94253033664715*^9, 3.9425307022843523`*^9}, 
+   3.9425312550223227`*^9, {3.94253160309877*^9, 3.942531605004019*^9}},
  CellLabel->
-  "In[231]:=",ExpressionUUID->"9db5001b-563a-4fab-8a4e-c90596f3d438"],
+  "In[236]:=",ExpressionUUID->"953f2797-ed59-461e-a990-f0ce6c9682c8"],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -3039,11 +3035,9 @@ TraditionalForm]\\)\"",
    AutoDelete->False,
    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
   "Grid"]], "Output",
- CellChangeTimes->{
-  3.942531297969301*^9, 3.942531378581237*^9, {3.942531415731372*^9, 
-   3.942531424804738*^9}, 3.942531483626528*^9},
+ CellChangeTimes->{3.942531606842985*^9},
  CellLabel->
-  "Out[235]=",ExpressionUUID->"4348e9ae-98fc-4364-a7d6-41f9b30925b8"]
+  "Out[241]=",ExpressionUUID->"a8664e83-7c2b-4511-8dd9-4932094c6b21"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
@@ -3244,10 +3238,9 @@ Cell[21958, 695, 412, 11, 30, "Item",ExpressionUUID->"124a8deb-3235-4410-83b9-f7
 Cell[22373, 708, 446, 12, 30, "Item",ExpressionUUID->"3a0b8222-c992-4137-8788-5884e4e12aad"],
 Cell[22822, 722, 412, 12, 30, "Item",ExpressionUUID->"4da70bdf-6c0d-4392-bf04-d81660def3ed"],
 Cell[23237, 736, 921, 26, 33, "Text",ExpressionUUID->"06f1e404-ac12-4be3-9621-a1725baa2fd5"],
-Cell[24161, 764, 2027, 47, 340, "Input",ExpressionUUID->"953f2797-ed59-461e-a990-f0ce6c9682c8"],
 Cell[CellGroupData[{
-Cell[26213, 815, 1639, 44, 209, "Input",ExpressionUUID->"9db5001b-563a-4fab-8a4e-c90596f3d438"],
-Cell[27855, 861, 100056, 2184, 311, "Output",ExpressionUUID->"4348e9ae-98fc-4364-a7d6-41f9b30925b8"]
+Cell[24183, 766, 3539, 89, 561, "Input",ExpressionUUID->"953f2797-ed59-461e-a990-f0ce6c9682c8"],
+Cell[27725, 857, 99959, 2182, 292, "Output",ExpressionUUID->"a8664e83-7c2b-4511-8dd9-4932094c6b21"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
