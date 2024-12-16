@@ -1,0 +1,327 @@
+Directory Map for: ./
+
+.~lock.lab11_chaos_report.odt#
+L11_12_Chaos.pdf
+PhysRevLett.47.1349.pdf
+SR760m_chap2.pdf
+analyze_multiple_measurement_points.m
+analyze_single_dataset.m
+analyze_single_dataset_positive_negative_peaks.m
+bifurcation_diagram.m
+bifurcation_diagram.png
+bifurcation_diagram_yang.m
+book chapter on logistic equation mapping.pdf
+create_bifurcation_diagram.m
+directory_map.txt
+[Folder] figures
+[Folder] functions
+    find_VR_at_V0_peaks.m
+    find_threshold.m
+    logistic.m
+    period_doubling_analysis.m
+    process_all_folders.m
+    process_scope_data.m
+    read_scope_data.m
+lab11_chaos_lab_notes_11212024.odt
+lab11_chaos_report.odt
+lab11_onsetOfChaos.nb
+lab11_onsetOfChaos_01.nb
+old61a.m
+[Folder] oscill_data
+    [Folder] ALL0000
+        .~lock.F0000CH1.CSV#
+        F0000CH1.CSV
+        F0000CH2.CSV
+        F0000TEK.BMP
+        F0000TEK.SET
+    [Folder] ALL0001
+        F0001CH1.CSV
+        F0001CH2.CSV
+        F0001TEK.BMP
+        F0001TEK.SET
+    [Folder] ALL0002
+        F0002CH1.CSV
+        F0002CH2.CSV
+        F0002TEK.BMP
+        F0002TEK.SET
+    [Folder] ALL0003
+        F0003CH1.CSV
+        F0003CH2.CSV
+        F0003TEK.BMP
+        F0003TEK.SET
+    [Folder] ALL0004
+        F0004CH1.CSV
+        F0004CH2.CSV
+        F0004TEK.BMP
+        F0004TEK.SET
+    [Folder] ALL0005
+        F0005CH1.CSV
+        F0005CH2.CSV
+        F0005TEK.BMP
+        F0005TEK.SET
+    [Folder] ALL0006
+        F0006CH1.CSV
+        F0006CH2.CSV
+        F0006TEK.BMP
+        F0006TEK.SET
+    [Folder] ALL0007
+        F0007CH1.CSV
+        F0007CH2.CSV
+        F0007TEK.BMP
+        F0007TEK.SET
+    [Folder] ALL0008
+        F0008CH1.CSV
+        F0008CH2.CSV
+        F0008TEK.BMP
+        F0008TEK.SET
+    [Folder] ALL0009
+        F0009CH1.CSV
+        F0009CH2.CSV
+        F0009TEK.BMP
+        F0009TEK.SET
+    [Folder] ALL0010
+        F0010CH1.CSV
+        F0010CH2.CSV
+        F0010TEK.BMP
+        F0010TEK.SET
+    [Folder] ALL0011
+        F0011CH1.CSV
+        F0011CH2.CSV
+        F0011TEK.BMP
+        F0011TEK.SET
+    [Folder] ALL0012
+        F0012CH1.CSV
+        F0012CH2.CSV
+        F0012TEK.BMP
+        F0012TEK.SET
+    [Folder] ALL0013
+        F0013CH1.CSV
+        F0013CH2.CSV
+        F0013TEK.BMP
+        F0013TEK.SET
+    [Folder] ALL0014
+        F0014CH1.CSV
+        F0014CH2.CSV
+        F0014TEK.BMP
+        F0014TEK.SET
+    [Folder] ALL0015
+        F0015CH1.CSV
+        F0015CH2.CSV
+        F0015TEK.BMP
+        F0015TEK.SET
+    [Folder] ALL0016
+        F0016CH1.CSV
+        F0016CH2.CSV
+        F0016TEK.BMP
+        F0016TEK.SET
+    [Folder] ALL0017
+        F0017CH1.CSV
+        F0017CH2.CSV
+        F0017TEK.BMP
+        F0017TEK.SET
+    [Folder] ALL0018
+        F0018CH1.CSV
+        F0018CH2.CSV
+        F0018TEK.BMP
+        F0018TEK.SET
+    [Folder] ALL0019
+        F0019CH1.CSV
+        F0019CH2.CSV
+        F0019TEK.BMP
+        F0019TEK.SET
+    [Folder] ALL0020
+        F0020CH1.CSV
+        F0020CH2.CSV
+        F0020TEK.BMP
+        F0020TEK.SET
+    [Folder] ALL0021
+        F0021CH1.CSV
+        F0021CH2.CSV
+        F0021TEK.BMP
+        F0021TEK.SET
+    [Folder] ALL0022
+        F0022CH1.CSV
+        F0022CH2.CSV
+        F0022TEK.BMP
+        F0022TEK.SET
+    [Folder] ALL0023
+        F0023CH1.CSV
+        F0023CH2.CSV
+        F0023TEK.BMP
+        F0023TEK.SET
+    [Folder] ALL0024
+        F0024CH1.CSV
+        F0024CH2.CSV
+        F0024TEK.BMP
+        F0024TEK.SET
+    [Folder] ALL0025
+        F0025CH1.CSV
+        F0025CH2.CSV
+        F0025TEK.BMP
+        F0025TEK.SET
+    [Folder] ALL0026
+        F0026CH1.CSV
+        F0026CH2.CSV
+        F0026TEK.BMP
+        F0026TEK.SET
+    [Folder] ALL0027
+        F0027CH1.CSV
+        F0027CH2.CSV
+        F0027TEK.BMP
+        F0027TEK.SET
+    [Folder] ALL0028
+        F0028CH1.CSV
+        F0028CH2.CSV
+        F0028TEK.BMP
+        F0028TEK.SET
+    [Folder] ALL0029
+        F0029CH1.CSV
+        F0029CH2.CSV
+        F0029TEK.BMP
+        F0029TEK.SET
+    [Folder] ALL0030
+        F0030CH1.CSV
+        F0030CH2.CSV
+        F0030TEK.BMP
+        F0030TEK.SET
+    [Folder] ALL0031
+        F0031CH1.CSV
+        F0031CH2.CSV
+        F0031TEK.BMP
+        F0031TEK.SET
+    [Folder] ALL0032
+        F0032CH1.CSV
+        F0032CH2.CSV
+        F0032TEK.BMP
+        F0032TEK.SET
+    [Folder] ALL0033
+        F0033CH1.CSV
+        F0033CH2.CSV
+        F0033TEK.BMP
+        F0033TEK.SET
+    [Folder] ALL0034
+        F0034CH1.CSV
+        F0034CH2.CSV
+        F0034TEK.BMP
+        F0034TEK.SET
+    [Folder] ALL0035
+        F0035CH1.CSV
+        F0035CH2.CSV
+        F0035TEK.BMP
+        F0035TEK.SET
+    [Folder] ALL0036
+        F0036CH1.CSV
+        F0036CH2.CSV
+        F0036TEK.BMP
+        F0036TEK.SET
+    [Folder] ALL0037
+        F0037CH1.CSV
+        F0037CH2.CSV
+        F0037TEK.BMP
+        F0037TEK.SET
+    [Folder] ALL0038
+        F0038CH1.CSV
+        F0038CH2.CSV
+        F0038TEK.BMP
+        F0038TEK.SET
+    [Folder] ALL0039
+        F0039CH1.CSV
+        F0039CH2.CSV
+        F0039TEK.BMP
+        F0039TEK.SET
+    [Folder] ALL0040
+        F0040CH1.CSV
+        F0040CH2.CSV
+        F0040TEK.BMP
+        F0040TEK.SET
+    [Folder] ALL0041
+        F0041CH1.CSV
+        F0041CH2.CSV
+        F0041TEK.BMP
+        F0041TEK.SET
+    [Folder] ALL0042
+        F0042CH1.CSV
+        F0042CH2.CSV
+        F0042TEK.BMP
+        F0042TEK.SET
+    [Folder] ALL0043
+        F0043CH1.CSV
+        F0043CH2.CSV
+        F0043TEK.BMP
+        F0043TEK.SET
+    [Folder] ALL0044
+        F0044CH1.CSV
+        F0044CH2.CSV
+        F0044TEK.BMP
+        F0044TEK.SET
+    [Folder] ALL0045
+        F0045CH1.CSV
+        F0045CH2.CSV
+        F0045TEK.BMP
+        F0045TEK.SET
+    [Folder] ALL0046
+        F0046CH1.CSV
+        F0046CH2.CSV
+        F0046TEK.BMP
+        F0046TEK.SET
+    [Folder] ALL0047
+        F0047CH1.CSV
+        F0047CH2.CSV
+        F0047TEK.BMP
+        F0047TEK.SET
+    [Folder] ALL0048
+        F0048CH1.CSV
+        F0048CH2.CSV
+        F0048TEK.BMP
+        F0048TEK.SET
+    [Folder] ALL0049
+        F0049CH1.CSV
+        F0049CH2.CSV
+        F0049TEK.BMP
+        F0049TEK.SET
+    [Folder] ALL0050
+        F0050CH1.CSV
+        F0050CH2.CSV
+        F0050TEK.BMP
+        F0050TEK.SET
+    [Folder] ALL0051
+        F0051CH1.CSV
+        F0051CH2.CSV
+        F0051TEK.BMP
+        F0051TEK.SET
+    TEK0000.CSV
+    TEK0001.CSV
+raw_frequency_spectra_allV0.m
+raw_oscill_data.m
+rlc_bifurcation.png
+[Folder] spectro_data
+    Spect_1dot010V
+    Spect_1dot060V
+    Spect_1dot115V
+    Spect_1dot1350V
+    Spect_1dot150V
+    Spect_1dot219V
+    Spect_1dot240V
+    Spect_1dot280V
+    Spect_1dot315V
+    Spect_1dot394V
+    Spect_1dot431V
+    Spect_1dot469V
+    Spect_1dot520V
+    Spect_dot100V
+    Spect_dot150V
+    Spect_dot200V
+    Spect_dot250V
+    Spect_dot308V
+    Spect_dot450V
+    Spect_dot600V
+    Spect_dot750V
+task2_logistic_behavior.m
+task3_first_period_doubling_behavior.m
+task4_period_doubling_thresholds.m
+[Folder] week1_data
+    F0017CH1.CSV
+    F0017CH2.CSV
+    F0017TEK.BMP
+    F0017TEK.SET
+    Lab11_Spectrum_Part61A
